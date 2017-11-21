@@ -40,7 +40,7 @@ def gen_QA(path, id_list, wordcount):
     ans_list = []
     _id = []
     for item in range(1450):
-        print(item)
+        #print(item)
         file_path = os.path.join(path, str(item)+'.txt')
         total_question = {}
         final_question =[]
@@ -88,15 +88,40 @@ def gen_QA(path, id_list, wordcount):
         ans_list.append(final_ans)
         question_list.append(final_question)
         _id.append(id_list[item])
-    #print(sum(len(x) for x in ans_list))
+    print('total qa pair:', sum(len(x) for x in ans_list))
+    ans_dict = {}
+    for film_ans_set in ans_list:
+        for ans in film_ans_set:
+            ans_dict[ans] = ans_dict.get(ans, 0) + 1
+    #[ans_dict[ans]=ans_dict.get(ans, 0) + 1 for ans in film_ans_set for film_ans_set in ans_list]
+    print('ans_dict:',ans_dict)
+    how_many_count = 0
+    what_count = 0
+    for final_question in question_list:
+        for question in final_question:
+            if question.split(' ')[0] == 'how':
+                how_many_count += 1
+            elif question.split(' ')[0] == 'what':
+                what_count += 1
+    print('how many',  how_many_count)
+    print('what:', what_count)
+    import matplotlib.pyplot as plt
+    a = [i for i in range(1, len(ans_dict)+1)]
+    b = list(ans_dict.values())
+    print('a:', len(a))
+    print('b:', len(b))
+    plt.figure()
+    plt.scatter(a,b,s = 10)
+    plt.savefig('test.png', dpi=300)
     #print(ans_list)
+    '''
     with open('../data/ans_list.pkl','wb') as f:
         pickle.dump(ans_list, f)
     with open('../data/ques_list.pkl','wb') as f:
         pickle.dump(question_list, f)
     with open('../data/_id.pkl','wb') as f:
         pickle.dump(_id, f)
-
+    '''
 
 wordcount, id_list = cal_count('../data/MLDS_hw2_data/training_label.json')
 gen_QA('../data/QAset/', id_list, wordcount)
