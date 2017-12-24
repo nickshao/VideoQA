@@ -99,6 +99,8 @@ def gen_QA(path, id_list, wordcount):
     for film_ans_set in ans_list:
         for ans in film_ans_set:
             ans_dict[ans] = ans_dict.get(ans, 0) + 1
+    with open('../data/ans_dict.pkl','wb') as f:
+        pickle.dump(ans_dict, f)
     #[ans_dict[ans]=ans_dict.get(ans, 0) + 1 for ans in film_ans_set for film_ans_set in ans_list]
     print('ans_dict:',ans_dict)
     how_many_count = 0
@@ -111,7 +113,8 @@ def gen_QA(path, id_list, wordcount):
                 what_count += 1
     print('how many',  how_many_count)
     print('what:', what_count)
-    '''
+
+    ''' For plotting...  
     import matplotlib.pyplot as plt
     a = [i for i in range(1, len(ans_dict)+1)]
     b = list(ans_dict.values())
@@ -120,9 +123,7 @@ def gen_QA(path, id_list, wordcount):
     plt.figure()
     plt.scatter(a,b,s = 10)
     plt.savefig('test.png', dpi=300)
-    '''
-    #print(ans_list)
-    '''
+
     with open('../data/ans_list.pkl','wb') as f:
         pickle.dump(ans_list, f)
     with open('../data/ques_list.pkl','wb') as f:
