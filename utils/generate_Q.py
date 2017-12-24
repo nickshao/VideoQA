@@ -5,6 +5,12 @@ import operator
 import pickle
 from nltk.tag import pos_tag
 from nltk.stem import WordNetLemmatizer
+
+import nltk
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
+
 wordnet = WordNetLemmatizer()
 total_file = 1450
 film_question_limit = 15
