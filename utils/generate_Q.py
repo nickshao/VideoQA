@@ -105,6 +105,7 @@ def gen_QA(path, id_list, wordcount):
                 what_count += 1
     print('how many',  how_many_count)
     print('what:', what_count)
+    '''
     import matplotlib.pyplot as plt
     a = [i for i in range(1, len(ans_dict)+1)]
     b = list(ans_dict.values())
@@ -113,6 +114,7 @@ def gen_QA(path, id_list, wordcount):
     plt.figure()
     plt.scatter(a,b,s = 10)
     plt.savefig('test.png', dpi=300)
+    '''
     #print(ans_list)
     '''
     with open('../data/ans_list.pkl','wb') as f:
